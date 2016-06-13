@@ -1,5 +1,7 @@
 <div>
     <p>Hello products</p>
-    <ng-outlet></ng-outlet>
+    <ul>
+        <li ng-repeat="product in $ctrl.products">{{ product.name }}</li>
+    </ul>
 
 </div>
