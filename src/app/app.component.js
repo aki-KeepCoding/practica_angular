@@ -5,7 +5,7 @@
             $routeConfig: [
                 {
                     name: 'Products',
-                    path: '/products',
+                    path: '/products/...',
                     component: 'products'
                 }
             ],
