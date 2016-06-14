@@ -4,9 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "sparrest" : "node ./node_modules/node-sparrest/node-sparrest.js",
-    "lite" : "lite-server",
-    "dev" : "concurrently 'npm run sparrest' 'npm run lite'"
+    "sparrest": "node ./node_modules/node-sparrest/node-sparrest.js",
+    "lite": "lite-server",
+    "dev": "concurrently 'npm run sparrest' 'npm run lite'"
   },
   "repository": {
     "type": "git",
@@ -21,7 +21,10 @@
   "homepage": "https://github.com/aki-KeepCoding/practica_whatapop#readme",
   "dependencies": {
     "@angular/router": "^0.2.0",
-    "angular": "^1.5.6"
+    "angular": "^1.5.6",
+    "angular-animate": "^1.5.6",
+    "angular-aria": "^1.5.6",
+    "angular-material": "^1.1.0-rc.5"
   },
   "devDependencies": {
     "concurrently": "^2.1.0",

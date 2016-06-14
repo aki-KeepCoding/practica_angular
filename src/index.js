@@ -1,7 +1,8 @@
 (function() {
     angular
         .module('whatapop', [
-                'ngComponentRouter'
+                'ngComponentRouter',
+                'ngMaterial'
             ])
 
     angular

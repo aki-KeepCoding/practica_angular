@@ -4,11 +4,23 @@
     <meta charset="UTF-8">
     <base href="/"> <!-- Indicamos la ruta base para SPA con componentRouter -->
     <title>Whatapop</title>
+    <link rel="stylesheet" href="/node_modules/angular-material/angular-material.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
     <script src="node_modules/angular/angular.js"></script>
     <script src="node_modules/@angular/router/angular1/angular_1_router.js"></script>
 
+    
+
+
     <script src="src/index.js"></script>
     <script src="src/config/conf.js"></script>
+
+    <!-- NG-Material -->
+    <script src="/node_modules/angular-aria/angular-aria.js"></script>
+    <script src="/node_modules/angular-animate/angular-animate.js"></script>
+    <script src="/node_modules/angular-material/angular-material.js"></script>
+
 
     <!-- SERVICES -->
     <script src="src/services/products.service.js"></script>
@@ -18,9 +30,12 @@
     <script src="src/products/product_detail.component.js"></script>
     <script src="src/products/products.component.js"></script>
     <script src="src/app/app.component.js"></script>
+
+    
+
 </head>
 
-<body ng-app="whatapop">
+<body ng-app="whatapop" >
     <app></app>
 </body>
 </html>
