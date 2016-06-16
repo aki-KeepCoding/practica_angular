@@ -1,35 +1,45 @@
 <div layout-fill layout="column">
     <md-toolbar class="md-whiteframe-4dp" layout="row" layout-align="space-between center">
-        <h3 class="md-toolbar-tools" >What A PoP</h3>
-        <form ng-submit="$event.preventDefault()" class="md-toolbar-tools" >
+        <h3 class="md-toolbar-tools" flex>What A PoP</h3>
+        <form ng-submit="$event.preventDefault()" class="md-toolbar-tools" flex="40" style="color:white">
+          <md-icon class="material-icons md-48"> search </md-icon>
           <md-autocomplete
-              flex="40"
-              layout-align="center center"
+              flex
               md-selected-item="$ctrl.selectedItem"
               md-search-text-change="$ctrl.searchTextChange($ctrl.searchText)"
               md-search-text="$ctrl.searchText"
               md-selected-item-change="$ctrl.selectedItemChange(item)"
-              md-items="item in $ctrl.querySearch(ctrl.searchText)"
-              md-item-text="item.display"
-              md-min-length="0"
-              placeholder="What is your favorite US state?">
+              md-items="item in $ctrl.querySearch($ctrl.searchText)"
+              md-item-text="item.name"
+              md-min-length="4"
+              placeholder="Buscar productos...">
             <md-item-template>
-              <span md-highlight-text="$ctrl.searchText" md-highlight-flags="^i">{{item.display}}</span>
+              <span md-highlight-text="$ctrl.searchText" md-highlight-flags="^i">{{item.name}}</span>
             </md-item-template>
-            <md-not-found>
-              No states matching "{{$ctrl.searchText}}" were found.
-              <a ng-click="$ctrl.newState(ctrl.searchText)">Create a new one!</a>
-            </md-not-found>
           </md-autocomplete>
+          
         </form>
-        <div flex="30"></div>
+        
+        <span flex></span>
     </md-toolbar>
      <div  layout="row" flex>
-        <md-sidenav md-is-locked-open="true" class="md-whiteframe-4dp" flex layout="column">
-            <md-list layout="column">
-                <md-button ng-link="['Products']" flex>
-                    <md-icon class="material-icons md-48"> dashboard </md-icon>Productos
-                </md-button>
+        <md-sidenav md-is-locked-open="true" class="md-whiteframe-2dp" flex layout="column">
+            <md-list class="md-dense" flex>
+              <md-subheader class="md-no-sticky">Categorías</md-subheader>
+              <md-list-item>
+                <p>Coches</p>
+                <md-checkbox class="md-secondary" ng-model="topping.wanted"></md-checkbox>
+              </md-list-item>
+              <md-list-item>
+                <p>Motos</p>
+                <md-checkbox class="md-secondary" ng-model="topping.wanted"></md-checkbox>
+              </md-list-item>
+              <md-list-item>
+                <p>Lavadoras</p>
+                <md-checkbox class="md-secondary" ng-model="topping.wanted"></md-checkbox>
+              </md-list-item>
+              <md-divider ></md-divider>
+                  
             </md-list>
         </md-sidenav>
         <md-content flex id="content">

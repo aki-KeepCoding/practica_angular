@@ -2,7 +2,8 @@
     angular
         .module('whatapop', [
                 'ngComponentRouter',
-                'ngMaterial'
+                'ngMaterial',
+                'ngLodash'
             ])
 
     angular
