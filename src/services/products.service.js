@@ -14,8 +14,9 @@
             return {
                 getAll: getAll,
                 get: get,
-                getFilteredList: getFilteredList,
-                search: search
+                filteredList: filteredList,
+                search: search,
+                productContainsText: productContainsText
             }
 
 
@@ -52,18 +53,40 @@
                 return filteredList
             }
 
-            function search (criteria) {
-                return 
-                    getAll()
+            function search (text) {
+                console.log("1")
+
+                return getAll()
                     .then(function (products) {
-                        filteredList.items = products
-                        return $q.when(_.filter(products, criteria))
+                        console.log("2")
+                        filteredList.items = _.filter(products, function(product) {
+                            var res = productContainsText(product, text)
+                            if (res) {
+                                console.log("MATCH!", product.name, text)
+                            }
+
+                            return res
+                        })
+                        console.log("3", filteredList)
+                        return $q.when(filteredList)
                     })
                     .catch(function (err) {
                         $log.error("Cannot obtain product data from Whatapop. Try again later...", err)
-                        return $q.when([])
+                        return $q.when(filteredList)
                     })
                 
+            }
+
+
+            function productContainsText (product, text) {
+                console.log("COMPARE!", product.name, text)
+                var lowercaseQuery = angular.lowercase(text)
+                var lowercaseProductName = angular.lowercase(product.name)
+                var lowercaseProductDesc = angular.lowercase(product.description)
+                var comp1 = lowercaseProductName.indexOf(lowercaseQuery) >= 0;
+                var comp2 = lowercaseProductDesc.indexOf(lowercaseQuery) >= 0
+                console.log("COMPARED!", comp1, comp2)
+                return  comp1 || comp2
             }
         }
 })();

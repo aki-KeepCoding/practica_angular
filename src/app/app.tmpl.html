@@ -1,4 +1,4 @@
-<div layout-fill layout="column">
+<!-- <div layout-fill layout="column">
     <md-toolbar class="md-whiteframe-4dp" layout="row" layout-align="space-between center">
         <h3 class="md-toolbar-tools" flex>What A PoP</h3>
         <form ng-submit="$event.preventDefault()" class="md-toolbar-tools" flex="40" style="color:white">
@@ -47,4 +47,42 @@
         </md-content>
         
     </div>
+</div>
+ -->
+
+
+
+
+<div layout-fill layout="column">
+    <md-toolbar class="md-whiteframe-4dp" layout="row" layout-align="space-between center">
+        <h3 class="md-toolbar-tools" flex>What A PoP</h3>
+          <search-product flex="40"></search-product>
+        <span flex></span>
+    </md-toolbar>
+     <div  layout="row" flex>
+        <md-sidenav md-is-locked-open="$mdMedia('min-width: 333px')" class="md-whiteframe-2dp"  layout="column" flex>
+            <md-list class="md-dense" flex="30">
+              <md-subheader class="md-no-sticky">Categorías</md-subheader>
+              <md-list-item>
+                <p>Coches</p>
+                <md-checkbox class="md-secondary" ng-model="topping.wanted"></md-checkbox>
+              </md-list-item>
+              <md-list-item>
+                <p>Motos</p>
+                <md-checkbox class="md-secondary" ng-model="topping.wanted"></md-checkbox>
+              </md-list-item>
+              <md-list-item>
+                <p>Lavadoras</p>
+                <md-checkbox class="md-secondary" ng-model="topping.wanted"></md-checkbox>
+              </md-list-item>
+              <md-divider ></md-divider>
+                  
+            </md-list>
+        </md-sidenav>
+    
+
+      <md-content layout-padding flex>
+        <ng-outlet></ng-outlet>
+      </md-content>
+
 </div>

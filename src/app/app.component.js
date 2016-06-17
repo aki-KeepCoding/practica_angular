@@ -15,38 +15,34 @@
         appCtrl.$inject = ['$timeout', '$q', '$log', 'ProductService']
         
         function appCtrl ($timeout, $q, $log, ProductService) {
-            var $ctrl = this;
+            var $ctrl = this
+            $ctrl.image = "http://lorempixel.com/400/200/"
             // 
-            $ctrl.products = loadAllProducts();
+            $ctrl.products = loadAllProducts()
             
             // Interface
-            $ctrl.querySearch   = querySearch;
-            $ctrl.selectedItemChange = selectedItemChange;
-            $ctrl.searchTextChange   = searchTextChange;
-            
+            $ctrl.querySearch   = querySearch
+            $ctrl.selectedItemChange = selectedItemChange
+            $ctrl.searchTextChange   = searchTextChange
+            $ctrl.search = search
+            $ctrl.searchText = ""
             // Implementation
             function querySearch (query) {
                 if (query) {
-                    var lowercaseQuery = angular.lowercase(query);
                     var res = $ctrl.products.filter( function (product) {
-                        var lowercaseQuery = angular.lowercase(query)
-                        var lowercaseProductName = angular.lowercase(product.name)
-                        var lowercaseProductDesc = angular.lowercase(product.description)
-                        var comp = (lowercaseProductName.indexOf(lowercaseQuery) >= 0 ||
-                            lowercaseProductDesc.indexOf(lowercaseQuery) >= 0)
-                        console.debug("comp", comp)
-                        
-                        return comp
+                        return ProductService.productContainsText(product, query)
                     })
-                    console.log(res)
                     return $q.when(res)
                 }
             }
             function searchTextChange(text) {
-              // $log.info('Text changed to ' + text);
+               $ctrl.searchText = text
+               if ($ctrl.searchText === "" ) {
+                    loadAllProducts();
+               }
             }
             function selectedItemChange(item) {
-              // $log.info('Item changed to ' + JSON.stringify(item));
+              search()
             }
             /**
              * Build `states` list of key/value pairs
@@ -57,6 +53,10 @@
                     .then(function (products) {
                         $ctrl.products = products;
                     }) 
+            }
+
+            function search () {
+                ProductService.search($ctrl.searchText)
             }
         }
 })()

@@ -5,10 +5,10 @@
     <base href="/"> <!-- Indicamos la ruta base para SPA con componentRouter -->
     <title>Whatapop</title>
     <link rel="stylesheet" href="/node_modules/angular-material/angular-material.css">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
-      rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"rel="stylesheet">
     
     <script src="node_modules/angular/angular.js"></script>
+    <script src="node_modules/angular-sanitize/angular-sanitize.js"></script>
     <script src="node_modules/@angular/router/angular1/angular_1_router.js"></script>
 
     <script src="node_modules/ng-lodash/build/ng-lodash.js"></script>
@@ -28,6 +28,8 @@
     <script src="src/services/products.service.js"></script>
 
     <!-- COMPONENTS -->
+
+    <script src="src/search/search_products.component.js"></script>
     <script src="src/products/product_list.component.js"></script>
     <script src="src/products/product_detail.component.js"></script>
     <script src="src/products/products.component.js"></script>
@@ -36,6 +38,22 @@
     <style>
         ._md-select-value > span {
             color: white;
+        }
+        md-card md-card-content {
+            padding: 0 3px 0 10px;
+        }
+        md-card-actions {
+            margin : 0;
+        }
+        md-card md-card-header {
+            padding: 2px 5px 2px 5px;
+        }
+        md-card-actions.layout-align-start-center.layout-row{
+            margin: 0;
+        }
+
+        md-card md-card-title {
+            padding: 0 16px 0 16px;
         }
     </style>
 

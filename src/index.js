@@ -3,7 +3,8 @@
         .module('whatapop', [
                 'ngComponentRouter',
                 'ngMaterial',
-                'ngLodash'
+                'ngLodash',
+                'ngSanitize'
             ])
 
     angular

@@ -6,9 +6,9 @@
             controller: ProductListComponent
         })
 
-        ProductListComponent.$inject = ['$log', 'ProductService']
+        ProductListComponent.$inject = ['$log', '$sanitize','ProductService']
 
-        function ProductListComponent($log, ProductService) {
+        function ProductListComponent($log, $sanitize, ProductService) {
             var $ctrl = this
 
             $ctrl.productFilter = {
@@ -17,21 +17,25 @@
                 }
             }
             // Interface
-            $ctrl.products = []
-            $ctrl.loadProducts = loadProducts
+            $ctrl.filteredList = ProductService.filteredList
+            // $ctrl.loadProducts = loadProducts
 
             // Init
             $ctrl.$routerOnActivate = function () {
-                $ctrl.loadProducts();
+                // $ctrl.loadProducts();
             }
 
-            //======IMPL======
-            function loadProducts () {
-                return ProductService
-                    .getAll()
-                    .then(function (products) {
-                        $ctrl.products = products;
-                    }) 
+            $ctrl.sanitize = function (text) {
+                return $sanitize(text)
+
             }
+            //======IMPL======
+            // function loadProducts () {
+            //     return ProductService
+            //         .getAll()
+            //         .then(function (products) {
+            //             $ctrl.products = products;
+            //         }) 
+            // }
         }
 })()
