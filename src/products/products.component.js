@@ -15,6 +15,6 @@
                     component: 'productDetail'
                 }
             ],
-            template: '<h2>Products</h2><ng-outlet></ng-outlet>'
+            template: '<ng-outlet></ng-outlet>'
         })
 })()

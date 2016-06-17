@@ -1,7 +1,10 @@
 (function() {
     angular
         .module('whatapop', [
-                'ngComponentRouter'
+                'ngComponentRouter',
+                'ngMaterial',
+                'ngLodash',
+                'ngSanitize'
             ])
 
     angular

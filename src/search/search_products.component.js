@@ -1,22 +1,15 @@
 (function() {
     angular
         .module('whatapop')
-        .component('app', {
-            $routeConfig: [
-                {
-                    name: 'Products',
-                    path: '/products/...',
-                    component: 'products'
-                }
-            ],
-            controller: appCtrl,
-            templateUrl : 'src/app/app.tmpl.html'
+        .component('searchProduct', {
+            templateUrl: 'src/search/search_products.tmpl.html',
+            controller: SearchProductsComponent
         })
-        appCtrl.$inject = ['$timeout', '$q', '$log', 'ProductService']
-        
-        function appCtrl ($timeout, $q, $log, ProductService) {
+
+        SearchProductsComponent.$inject = ['$log', 'ProductService']
+
+        function SearchProductsComponent($log, ProductService) {
             var $ctrl = this
-            $ctrl.image = "http://lorempixel.com/400/200/"
             // 
             $ctrl.products = loadAllProducts()
             
