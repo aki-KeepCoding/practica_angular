@@ -6,36 +6,30 @@
             controller: ProductListComponent
         })
 
-        ProductListComponent.$inject = ['$log', '$sanitize','ProductService']
+        ProductListComponent.$inject = ['$log', '$sanitize', '$mdMedia','ProductService', 'CategoryService']
 
-        function ProductListComponent($log, $sanitize, ProductService) {
+        function ProductListComponent($log, $sanitize, $mdMedia, ProductService, CategoryService) {
             var $ctrl = this
 
-            $ctrl.productFilter = {
-                category : {
-                    name: ''
-                }
-            }
             // Interface
             $ctrl.filteredList = ProductService.filteredList
-            // $ctrl.loadProducts = loadProducts
-
-            // Init
-            $ctrl.$routerOnActivate = function () {
-                // $ctrl.loadProducts();
-            }
-
+            $ctrl.selectedCategories = CategoryService.filteredList
+            $ctrl.customLgLayout = customLgLayout
+            
             $ctrl.sanitize = function (text) {
                 return $sanitize(text)
 
             }
-            //======IMPL======
-            // function loadProducts () {
-            //     return ProductService
-            //         .getAll()
-            //         .then(function (products) {
-            //             $ctrl.products = products;
-            //         }) 
-            // }
+
+           
+            function customLgLayout () {
+                if ($mdMedia('(min-width: 1750px)')) {
+                    return 4
+                } else {
+                    return 3
+                }
+                
+            }  
+
         }
 })()

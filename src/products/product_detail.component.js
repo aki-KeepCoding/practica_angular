@@ -3,18 +3,20 @@
         .module('whatapop')
         .component('productDetail', {
             templateUrl: 'src/products/product_detail.tmpl.html',
+            bindings: { $router: '<' },
             controller: ProductDetailComponent
         })
 
-        ProductDetailComponent.$inject = ['$log', 'ProductService']
+        ProductDetailComponent.$inject = ['$log', '$sanitize','ProductService']
 
-        function ProductDetailComponent($log, ProductService) {
+        function ProductDetailComponent($log, $sanitize,ProductService) {
             var $ctrl = this
 
            
             // Interface
             $ctrl.product = {}
             $ctrl.loadProduct = loadProduct
+            $ctrl.gotoProducts = gotoProducts;
 
             // Init
 
@@ -31,6 +33,9 @@
                         console.log(product)
                         $ctrl.product = product
                     })
+            }
+            function gotoProducts () {
+                this.$router.navigate(['ProductList'])
             }
         }
 })()

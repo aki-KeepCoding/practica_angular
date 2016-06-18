@@ -23,7 +23,7 @@
             function querySearch (query) {
                 if (query) {
                     var res = $ctrl.products.filter( function (product) {
-                        return ProductService.productContainsText(product, query)
+                        return ProductService.applyFilter(product, query)
                     })
                     return $q.when(res)
                 }

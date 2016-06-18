@@ -12,51 +12,44 @@
             controller: appCtrl,
             templateUrl : 'src/app/app.tmpl.html'
         })
-        appCtrl.$inject = ['$timeout', '$q', '$log', 'ProductService']
+        appCtrl.$inject = ['$scope', '$q', '$log', 'CategoryService', 'lodash']
         
-        function appCtrl ($timeout, $q, $log, ProductService) {
+        function appCtrl ($scope, $q, $log, CategoryService, _) {
             var $ctrl = this
-            $ctrl.image = "http://lorempixel.com/400/200/"
-            // 
-            $ctrl.products = loadAllProducts()
-            
+             
+            $ctrl.categories = {
+                items : []
+            }
             // Interface
-            $ctrl.querySearch   = querySearch
-            $ctrl.selectedItemChange = selectedItemChange
-            $ctrl.searchTextChange   = searchTextChange
-            $ctrl.search = search
-            $ctrl.searchText = ""
-            // Implementation
-            function querySearch (query) {
-                if (query) {
-                    var res = $ctrl.products.filter( function (product) {
-                        return ProductService.productContainsText(product, query)
-                    })
-                    return $q.when(res)
-                }
-            }
-            function searchTextChange(text) {
-               $ctrl.searchText = text
-               if ($ctrl.searchText === "" ) {
-                    loadAllProducts();
-               }
-            }
-            function selectedItemChange(item) {
-              search()
-            }
-            /**
-             * Build `states` list of key/value pairs
-             */
-            function loadAllProducts() {
-              return ProductService
+            $ctrl.loadCategories = loadCategories
+            $ctrl.categoryFilterChanged = categoryFilterChanged
+            // Init
+            $ctrl.loadCategories();
+            //======IMPL======
+            function loadCategories () {
+                return CategoryService
                     .getAll()
-                    .then(function (products) {
-                        $ctrl.products = products;
+                    .then(function (categories) {
+                        $ctrl.categories.items = categories;
+                        _.forEach($ctrl.categories.items, function (item) {
+                            item.selected = true
+                        })
                     }) 
             }
 
-            function search () {
-                ProductService.search($ctrl.searchText)
+            function categoryFilterChanged (category) {
+                category.selected = !category.selected
+                // return (category)
+                // if (CategoryService.isCategorySelected(category)) {
+                //     CategoryService.removeSelectedCategory(category)
+                    
+                // } else {
+                //     CategoryService.addSelectedCategory(category)
+                // }
             }
+
+            // function categoryState (category) {
+            //     return CategoryService.isCategorySelected(category)
+            // }
         }
 })()

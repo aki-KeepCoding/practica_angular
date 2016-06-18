@@ -1,15 +1,16 @@
 <md-grid-list
         flex        
-        md-cols-xs="1" md-cols-sm="1" md-cols-md="2"  md-cols-lg="4" md-cols-gt-lg="4"
-        md-row-height-xs="5:1" md-row-height-sm="1:1" md-row-height-md="3:1" md-row-height-lg="5:1" md-row-height-gt-lg="5:1"
+        md-cols-xs="1" md-cols-sm="1" md-cols-md="2"  md-cols-lg="{{$ctrl.customLgLayout()}}" md-cols-gt-lg="5"
+        md-row-height-xs="5:1" md-row-height-sm="1:1" md-row-height-md="3:1" md-row-height-lg="8:1" md-row-height-gt-lg="5:1"
         md-gutter="5px" md-gutter-gt-sm="3px" >
     <md-grid-tile  class="green"
-                    ng-repeat="product in $ctrl.filteredList.items"
+                    ng-repeat="product in $ctrl.filteredList.items | categoryFilter: $ctrl.selectedCategories"
                   md-colspan="1"
                   md-rowspan-xs="10"
                   md-rowspan-md="4"
-                  md-rowspan-lg="9"
-                  md-rowspan-gt-lg="6" >
+                  md-rowspan-lg="10"
+                  md-rowspan-gt-lg="10" 
+                  >
         <md-card class="md-dense">
             <div class="md-card-image"  style="height:150px; background-image:url({{'http://localhost:8000/' + product.photos[0]}});background-size:cover;background-position:center center"></div>
             <md-card-header>
@@ -26,7 +27,7 @@
             <md-card-title>
                 <md-card-title-text>
                     <span class="md-headline">{{product.name}}</span>
-                    <span class="md-subhead">{{product.price}} €</span>
+                    <span class="md-subhead">{{product.category.name}}</span>
                 </md-card-title-text>
             </md-card-title>
             <md-card-actions layout="row" layout-align="start center">
@@ -38,7 +39,7 @@
                 <md-icon class="material-icons"> share-arrow </md-icon>
               </md-button>
             </md-card-icon-actions>
-            <md-button>Ver +</md-button>
+            <md-button ng-link="['ProductDetail', {id: product.id}]">Ver +</md-button>
           </md-card-actions>
           <md-card-content>
             <p ng-bind-html="product.description.substring(0,100)">...
