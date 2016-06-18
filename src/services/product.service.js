@@ -60,6 +60,7 @@
                     .then(function (products) {
                         console.log("2")
                         filteredList.items = _.filter(products, function(product) {
+
                             var res = applyFilter(product, text)
                             return res
                         })
@@ -88,5 +89,8 @@
                 console.log("COMPARED!", comp1, comp2)
                 return  comp1 || comp2
             }
+
+
+            
         }
 })();

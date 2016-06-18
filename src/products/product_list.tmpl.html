@@ -30,18 +30,24 @@
                     <span class="md-subhead">{{product.category.name}}</span>
                 </md-card-title-text>
             </md-card-title>
-            <md-card-actions layout="row" layout-align="start center">
+            <md-card-actions layout="row" layout-align="start center" style="padding:0 10px 0 10px">
                 <md-card-icon-actions>
-                  <md-button class="md-icon-button" aria-label="Favorite">
-                        <md-icon class="material-icons"> favorite </md-icon>
+
+                  <md-button 
+                        class="md-mini" 
+                        aria-label="Favorite"
+                        ng-class="{'md-hue-2': $ctrl.isFavorite(product).favorite, 'md-fab': $ctrl.isFavorite(product).favorite, 'md-icon-button': !$ctrl.isFavorite(product).favorite }"
+                        ng-click="$ctrl.toggleFav(product)">
+                        <md-icon  class="material-icons "> favorite </md-icon>
                   </md-button>
                     <md-button class="md-icon-button" aria-label="Share">
                 <md-icon class="material-icons"> share-arrow </md-icon>
               </md-button>
             </md-card-icon-actions>
-            <md-button ng-link="['ProductDetail', {id: product.id}]">Ver +</md-button>
+            <md-button class="md-raised md-primary" ng-link="['ProductDetail', {id: product.id}]">Ver +</md-button>
           </md-card-actions>
           <md-card-content>
+            {{$ctrl.getValue()}}
             <p ng-bind-html="product.description.substring(0,100)">...
             <md-tooltip md-direction="top" md-delay="2000" style="max-width:200px">
               <span>{{product.description}}</span>
