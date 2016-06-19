@@ -6,9 +6,31 @@
                 {
                     name: 'Products',
                     path: '/products/...',
-                    component: 'products'
+                    component: 'products',
                 }
             ],
+            controller: AppController,
             templateUrl : 'src/app/app.tmpl.html'
         })
+    AppController.$inject = ['GeolocationService']
+
+    function AppController (GeolocationService) {
+        $ctrl = this
+        $ctrl.isGeolocationAvailable = false
+        $ctrl.$onInit = function () {
+            if (GeolocationService.isAvailable) {
+                console.log("1")
+
+                GeolocationService.getCurrentPosition().then(function (value) {
+                    $ctrl.isGeolocationAvailable = true
+                }).catch (function () {
+                    $ctrl.isGeolocationAvailable = false
+                })
+            } else {
+                return false
+            }
+        }
+        
+
+    }
 })()

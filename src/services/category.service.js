@@ -20,9 +20,6 @@
                 
             }
 
-
-
-
             // Implementation
             function getAll(){
                 return $http

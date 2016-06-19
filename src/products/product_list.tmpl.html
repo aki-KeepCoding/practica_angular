@@ -5,13 +5,16 @@
         md-gutter="5px" md-gutter-gt-sm="3px" >
 
     <md-grid-tile  class="green"
-                    ng-repeat="product in $ctrl.filteredList.items | categoryFilter: $ctrl.selectedCategories"
+                  ng-repeat="product in $ctrl.filteredList.items | 
+                              categoryFilter: $ctrl.selectedCategories |
+                              distanceFilter: $ctrl.users : $ctrl.location : $ctrl.distance "
                   md-colspan="1"
                   md-rowspan-xs="10"
                   md-rowspan-md="4"
                   md-rowspan-lg="10"
                   md-rowspan-gt-lg="10" 
                   >
+        
         <md-card class="md-dense">
             <div class="md-card-image"  style="height:150px; background-image:url({{'http://localhost:8000/' + product.photos[0]}});background-size:cover;background-position:center center"></div>
             <md-card-header>
@@ -48,14 +51,11 @@
             <md-button class="md-raised md-primary" ng-link="['ProductDetail', {id: product.id}]">Ver +</md-button>
           </md-card-actions>
           <md-card-content>
-              <p ng-bind-html="product.description.substring(0,100)">...
-              </p>
-              <large-tooltip text="{{product.description}}"></large-tooltip>
-            <!-- <md-tooltip md-direction="top" md-delay="2000" style="max-width:200px">
-              <span>{{product.description}}</span>
-
-            </md-tooltip> -->
-            
+              <p ng-bind-html="product.description.substring(0,100)"></p>
+              <large-tooltip 
+                  text="{{product.description}}"
+                  delay="2000">
+              </large-tooltip>
           </md-card-content>
         </md-card>
     </md-grid-tile>

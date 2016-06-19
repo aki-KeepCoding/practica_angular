@@ -4,7 +4,8 @@
                 'ngComponentRouter',
                 'ngMaterial',
                 'ngLodash',
-                'ngSanitize'
+                'ngSanitize',
+                'dahr.ng-haversine'
             ])
 
     angular

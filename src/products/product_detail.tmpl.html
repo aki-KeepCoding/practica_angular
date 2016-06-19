@@ -11,34 +11,51 @@
 
             <md-card flex="50">
             <md-card-header layout-align="space-between center">
-                        <md-card-avatar>
-                            <img class="md-user-avatar" src="{{ 'http://localhost:8000/' + $ctrl.product.seller.avatar}}"/>
-                        </md-card-avatar>
-                         <md-card-header-text>
-                            <span class="md-title">{{$ctrl.product.seller.nick}}</span>
-                            <span class="md-subtitle">{{$ctrl.product.price}} €</span>
-                        </md-card-header-text>
-                    <md-card-title-text>
-                        <span class="md-headline">{{$ctrl.product.name}}</span>
-                    </md-card-title-text>
+                <md-card-title-text>
+                    <span class="md-headline">{{$ctrl.product.name}}</span>
+                </md-card-title-text>
                 
             </md-card-header>
 
-                <md-card-content layout-padding layout="rows">
+                <md-card-content layout-padding layout="row">
                     
                     <!-- <div class="md-media-xl card-media" style="background-color: #999999;"> -->
-                    <img src="{{'http://localhost:8000/' + $ctrl.product.photos[0]}}" alt="" flex>
-                    <!-- </div> -->
-                    <div layout="column" flex layout-align="space-around">
-                        <p ng-bind-html="$ctrl.product.description"></p>
-                        <span flex></span>
-                        <span class="md-subhead">{{$ctrl.product.category.name}}</span>
-                    </div>
+                        <img src="{{'http://localhost:8000/' + $ctrl.product.photos[0]}}" alt="" flex>
+                        <!-- </div> -->
+                        <div layout="column" flex layout-align="space-around">
+                            <p ng-bind-html="$ctrl.product.description"></p>
+                            <span flex></span>
+                        </div>
+                    
+
                 </md-card-content>
                 <md-card-actions layout="row" layout-align="end center">
-                        
-                    <md-button ng-click="$ctrl.gotoProducts()">Volver</md-button>
+                    <md-button class="md-primary md-raised" ng-click="$ctrl.gotoProducts()">Volver</md-button>
                 </md-card-actions>
+            </md-card>
+            <md-card >
+                <md-card-header layout-align="space-between center">
+                    <md-card-avatar>
+                        <img class="md-user-avatar" src="{{ 'http://localhost:8000/' + $ctrl.product.seller.avatar}}"/>
+                    </md-card-avatar>
+                     <md-card-header-text>
+                        <span class="md-title">{{$ctrl.product.seller.nick}}</span>
+                    </md-card-header-text>
+                    
+                
+                </md-card-header>
+                <md-card-content layout-padding >
+                    <md-list class="md-dense">
+                        <md-list-item>
+                            Precio: {{$ctrl.product.price}} €
+                        </md-list-item>
+                        <md-list-item>
+                            Categoría: {{$ctrl.product.category.name}}
+                        </md-list-item>
+                    </md-list>
+                                        
+                    <img src="{{$ctrl.staticMapUrl}}" alt="">
+                </md-card-content>
             </md-card>
             <span flex></span>
     </md-content>

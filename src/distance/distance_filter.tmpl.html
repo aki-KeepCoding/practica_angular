@@ -1,0 +1,38 @@
+ <md-list>
+  <md-subheader class="md-no-sticky">Distancia</md-subheader>
+  <md-list-item>
+    <p>Filtrar por distancia?</p>
+    <md-switch 
+      class="md-primary" 
+      md-no-ink aria-label="Activar Distancia" 
+      ng-model="$ctrl.distance.enabled">
+    </md-switch>
+  </md-list-item>
+  <md-list-item>
+    <md-slider-container flex layout="row">
+      <md-slider 
+            id="distance-slider"
+            flex 
+            min="0" max="500" 
+            ng-disabled="!$ctrl.distance.enabled"
+            ng-model="$ctrl.distance.km" 
+            aria-label="distancia" >
+      </md-slider>
+      <md-input-container flex="20">
+        <input 
+          flex type="number" 
+          ng-model="$ctrl.distance.km" 
+          aria-label="distancia" 
+          aria-controls="distance-slider">
+          <span>Km</span>
+      </md-input-container>
+    </md-slider-container>
+  </md-list-item>
+
+  <md-list-item >
+    <div layout="row" layout-align="center center">
+      <img src="{{$ctrl.staticMapUrl}}" alt="">
+    </div>
+  </md-list-item>
+  
+</md-list>

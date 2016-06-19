@@ -11,6 +11,7 @@
             layout="column" 
             flex="20">
             <category-selector></category-selector>
+            <distance-filter ng-show="$ctrl.isGeolocationAvailable"></distance-filter>
         </md-sidenav>
       <md-content layout-padding flex>
         <ng-outlet></ng-outlet>
