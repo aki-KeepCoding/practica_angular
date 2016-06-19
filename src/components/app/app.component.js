@@ -10,7 +10,7 @@
                 }
             ],
             controller: AppController,
-            templateUrl : 'src/app/app.tmpl.html'
+            templateUrl : 'src/components/app/app.tmpl.html'
         })
     AppController.$inject = ['GeolocationService']
 

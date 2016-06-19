@@ -2,7 +2,7 @@
     angular
         .module('whatapop')
         .component('productList', {
-            templateUrl: 'src/products/product_list.tmpl.html',
+            templateUrl: 'src/components/products/product_list.tmpl.html',
             controller: ProductListComponent
         })
 

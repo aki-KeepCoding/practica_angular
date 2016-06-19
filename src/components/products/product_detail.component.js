@@ -3,7 +3,7 @@
         .module('whatapop')
         .component('productDetail', {
             
-            templateUrl: 'src/products/product_detail.tmpl.html',
+            templateUrl: 'src/components/products/product_detail.tmpl.html',
             bindings: { $router: '<' },
             controller: ProductDetailComponent
         })

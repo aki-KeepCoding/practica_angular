@@ -2,7 +2,7 @@
     angular
         .module('whatapop')
         .component('searchProduct', {
-            templateUrl: 'src/search/search_products.tmpl.html',
+            templateUrl: 'src/components/search_products/search_products.tmpl.html',
             controller: SearchProductsComponent
         })
 
@@ -14,7 +14,8 @@
             $ctrl.products = loadAllProducts()
             
             // Interface
-            $ctrl.querySearch   = querySearch
+            $ctrl.querySearch = querySearch
+            $ctrl.searchOnKeyUp = searchOnKeyUp
             $ctrl.selectedItemChange = selectedItemChange
             $ctrl.searchTextChange   = searchTextChange
             $ctrl.search = search
@@ -25,17 +26,20 @@
                     var res = $ctrl.products.filter( function (product) {
                         return ProductService.applyFilter(product, query)
                     })
-                    return $q.when(res)
+                    return res
+                } else {
+                    return []
                 }
             }
             function searchTextChange(text) {
                $ctrl.searchText = text
                if ($ctrl.searchText === "" ) {
-                    loadAllProducts();
+                    loadAllProducts()
+                    querySearch("")
                }
             }
             function selectedItemChange(item) {
-              search()
+                search()
             }
             /**
              * Build `states` list of key/value pairs
@@ -44,12 +48,18 @@
               return ProductService
                     .getAll()
                     .then(function (products) {
-                        $ctrl.products = products;
+                        $ctrl.products = products
                     }) 
             }
 
             function search () {
                 ProductService.search($ctrl.searchText)
+            }
+
+            function searchOnKeyUp ($event) {
+                if ($event.keyCode === 13){
+                    search()
+                }
             }
         }
 })()

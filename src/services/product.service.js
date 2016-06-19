@@ -54,17 +54,13 @@
             }
 
             function search (text) {
-                console.log("1")
-
                 return getAll()
                     .then(function (products) {
-                        console.log("2")
                         filteredList.items = _.filter(products, function(product) {
 
                             var res = applyFilter(product, text)
                             return res
                         })
-                        console.log("3", filteredList)
                         return $q.when(filteredList)
                     })
                     .catch(function (err) {
@@ -76,8 +72,6 @@
 
 
             function applyFilter (product, text) {
-                console.log("COMPARE!", product.name, text)
-
                 var lowercaseQuery = angular.lowercase(text)
                 var lowercaseProductName = angular.lowercase(product.name)
                 var lowercaseProductDesc = angular.lowercase(product.description)
@@ -86,7 +80,6 @@
                 
 
                 var comp2 = lowercaseProductDesc.indexOf(lowercaseQuery) >= 0
-                console.log("COMPARED!", comp1, comp2)
                 return  comp1 || comp2
             }
 

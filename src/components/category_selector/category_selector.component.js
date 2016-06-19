@@ -2,7 +2,7 @@
     angular
         .module('whatapop')
         .component('categorySelector', {
-            templateUrl: 'src/categories/category_selector.tmpl.html',
+            templateUrl: 'src/components/category_selector/category_selector.tmpl.html',
             controller: CategorySelectorComponent
         })
 

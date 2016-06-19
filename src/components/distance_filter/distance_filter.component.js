@@ -2,7 +2,7 @@
     angular
         .module('whatapop')
         .component('distanceFilter', {
-            templateUrl: 'src/distance/distance_filter.tmpl.html',
+            templateUrl: 'src/components/distance_filter/distance_filter.tmpl.html',
             controller: DistanceFilterComponent
         })
 
