@@ -10,10 +10,12 @@ $> cd practica_whatapop
 $> npm install
 ```
 
-Se puede descargar y descomprimir el conjunto de datos de prueba desde (https://www.dropbox.com/s/xhlnte7pamaw42w/angularjs-test-data.zip?dl=0)
+Se puede descargar y descomprimir el conjunto de datos de prueba desde (https://dl.dropboxusercontent.com/u/205479/data.zip). 
 
 ```sh
-$> unzip angularjs-test-data.zip
+$> mv data.zip /path/to/practica_whatapop/
+$> cd /path/to/practica_whatapop/
+$> unzip data.zip
 ```
 
 ## Funcionamiento
