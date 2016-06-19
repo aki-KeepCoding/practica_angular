@@ -3,6 +3,7 @@
         md-cols-xs="1" md-cols-sm="1" md-cols-md="2"  md-cols-lg="{{$ctrl.customLgLayout()}}" md-cols-gt-lg="5"
         md-row-height-xs="5:1" md-row-height-sm="1:1" md-row-height-md="3:1" md-row-height-lg="8:1" md-row-height-gt-lg="5:1"
         md-gutter="5px" md-gutter-gt-sm="3px" >
+
     <md-grid-tile  class="green"
                     ng-repeat="product in $ctrl.filteredList.items | categoryFilter: $ctrl.selectedCategories"
                   md-colspan="1"
@@ -47,12 +48,13 @@
             <md-button class="md-raised md-primary" ng-link="['ProductDetail', {id: product.id}]">Ver +</md-button>
           </md-card-actions>
           <md-card-content>
-            {{$ctrl.getValue()}}
-            <p ng-bind-html="product.description.substring(0,100)">...
-            <md-tooltip md-direction="top" md-delay="2000" style="max-width:200px">
+              <p ng-bind-html="product.description.substring(0,100)">...
+              </p>
+              <large-tooltip text="{{product.description}}"></large-tooltip>
+            <!-- <md-tooltip md-direction="top" md-delay="2000" style="max-width:200px">
               <span>{{product.description}}</span>
-            </md-tooltip>
-            </p>
+
+            </md-tooltip> -->
             
           </md-card-content>
         </md-card>
