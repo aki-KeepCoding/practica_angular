@@ -18,6 +18,15 @@ $> unzip angularjs-test-data.zip
 
 ## Funcionamiento
 
+### Arranque del backend
+
+```sh
+$> npm run dev
+```
+
+Esto arranca el servidor del backend sparrest y lite-server concurrentemente
+
+Se puede visitar la aplicación en [http://localhost:3000](http://localhost:3000)
 ### Búsqueda
 
 Se puede realizar una búsqueda de productos mediante la caja de búsqueda de la barra superior.
