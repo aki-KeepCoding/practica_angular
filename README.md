@@ -10,7 +10,7 @@ $> cd practica_whatapop
 $> npm install
 ```
 
-Se puede descargar y descomprimir el conjunto de datos de prueba desde (https://dl.dropboxusercontent.com/u/205479/data.zip). 
+Se puede descargar y descomprimir el conjunto de datos de prueba desde [este enlace](https://dl.dropboxusercontent.com/u/205479/data.zip). 
 
 ```sh
 $> mv data.zip /path/to/practica_whatapop/
@@ -28,7 +28,7 @@ $> npm run dev
 
 Esto arranca el servidor del backend sparrest y lite-server concurrentemente
 
-Se puede visitar la aplicación en [http://localhost:3000](http://localhost:3000)
+Se puede abrir la aplicación en [http://localhost:3000](http://localhost:3000)
 ### Búsqueda
 
 Se puede realizar una búsqueda de productos mediante la caja de búsqueda de la barra superior.
