@@ -7,6 +7,9 @@
 
         function FavoritesService ($http, $q, $log, CONF, _) {
             var favorites = null
+            var favoriteFilter = {
+                enabled : false
+            }
             if (typeof(Storage) !== "undefined") {
                 favorites = localStorage
             } else {
@@ -25,6 +28,7 @@
 
             return {
                 favorites : favorites,
+                favoriteFilter: favoriteFilter,
                 toggleFavorite: toggleFavorite,
                 setFavorite: setFavorite,
                 getFavorite: getFavorite

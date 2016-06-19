@@ -1,6 +1,6 @@
 <div layout-fill layout="column">
     <md-toolbar class="md-whiteframe-4dp" layout="row" layout-align="space-between center">
-        <h3 class="md-toolbar-tools" flex>What A PoP</h3>
+        <h1 class="md-toolbar-tools" flex class="logo" >WhatAPoP</h1>
           <search-product flex="40"></search-product>
         <span flex></span>
     </md-toolbar>
@@ -11,6 +11,7 @@
             layout="column" 
             flex="20">
             <category-selector></category-selector>
+            <favorite-selector></favorite-selector>
             <distance-filter ng-show="$ctrl.isGeolocationAvailable"></distance-filter>
         </md-sidenav>
       <md-content layout-padding flex>

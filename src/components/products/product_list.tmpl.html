@@ -7,7 +7,8 @@
     <md-grid-tile  class="green"
                   ng-repeat="product in $ctrl.filteredList.items | 
                               categoryFilter: $ctrl.selectedCategories |
-                              distanceFilter: $ctrl.users : $ctrl.location : $ctrl.distance "
+                              distanceFilter: $ctrl.users : $ctrl.location : $ctrl.distance |
+                              favoriteFilter: $ctrl.favoriteFilter"
                   md-colspan="1"
                   md-rowspan-xs="10"
                   md-rowspan-md="4"

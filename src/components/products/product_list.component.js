@@ -53,6 +53,8 @@
 
                 // Obtenemos la distancia 'almacenada' en DistanceService
                 $ctrl.distance = DistanceService.distance
+
+                $ctrl.favoriteFilter = FavoritesService.favoriteFilter
             };
             
 

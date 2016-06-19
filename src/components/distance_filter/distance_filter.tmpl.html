@@ -1,7 +1,7 @@
  <md-list>
   <md-subheader class="md-no-sticky">Distancia</md-subheader>
   <md-list-item>
-    <p>Filtrar por distancia?</p>
+    <p>Filtrar por distancia? (En Km)</p>
     <md-switch 
       class="md-primary" 
       md-no-ink aria-label="Activar Distancia" 
@@ -13,7 +13,7 @@
       <md-slider 
             id="distance-slider"
             flex 
-            min="0" max="500" 
+            min="0" max="500" step="100"
             ng-disabled="!$ctrl.distance.enabled"
             ng-model="$ctrl.distance.km" 
             aria-label="distancia" >
@@ -24,7 +24,6 @@
           ng-model="$ctrl.distance.km" 
           aria-label="distancia" 
           aria-controls="distance-slider">
-          <span>Km</span>
       </md-input-container>
     </md-slider-container>
   </md-list-item>
