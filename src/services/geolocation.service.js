@@ -27,15 +27,13 @@
                 }
             }
             function getCurrentPosition(){
-                console.log("a")
                 var deferred = $q.defer()
                 if (!isAvailable()){
                     $log.error("No geolocation available in your browser")
                     deferred.reject({})
                 }
                 navigator.geolocation.getCurrentPosition(function(position) {
-                    console.log("b")
-                  deferred.resolve(position.coords)
+                    deferred.resolve(position.coords)
                 });
                 return deferred.promise
             }

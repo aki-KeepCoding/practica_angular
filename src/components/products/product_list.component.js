@@ -44,7 +44,6 @@
                 
                 // Obtenermos la geolocalización del usuario (si se puede)
                 GeolocationService.getCurrentPosition().then( function (position) {
-                    console.log("c")
                     $ctrl.location = {
                         "latitude" : position.latitude,
                         "longitude" : position.longitude

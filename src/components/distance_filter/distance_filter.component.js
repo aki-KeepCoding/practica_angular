@@ -22,7 +22,6 @@
                                             "markers=color:red|" + location.latitude + "," + location.longitude + "&" +
                                             "size=300x100&" +
                                             "key=" + CONF.GOOGLE_MAPS_KEY;
-                        console.log($ctrl.staticMapUrl)
                     })
                     .catch (function () {
                         $ctrl.staticMapUrl = "#"
