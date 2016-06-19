@@ -1,3 +1,5 @@
 node_modules/
 static/
 api/
+.DS_Store
+.idea/
