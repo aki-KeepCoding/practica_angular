@@ -1,4 +1,22 @@
+<!-- 
+Permite aplicar un filtro de búsqueda sobre los productos que coincidan con el texto introducido
+Además según escribimos el texto nos sugiere productos existentes en la BD
+Para ello se usa el componente md-autocomplete de Angular material 
+-->
+<!--
+propiedades destacables
+* md-selected-item => el elemento seleccionado si hemos seleccionado una sugerencia 
+* md-search-text-change => la función que captura el cambio de texto en el input
+* md-search-text => el texto escrito en el imput
+* md-selected-item-change => la función que captura el evento de selección de una sugerencia
+* md-items => la lista de elementos sugeridos (realiza una búsqueda con el texto escrito sobre productos con querySearch)
+* md-item-text => el texto que se muestra en el input cuando seleccionamos una sugerencia (product.name)
+* md-min-lenght => el tamaño del texto a partir el cual se empieza a realizar la query para buscar sugerencias
+* ng-keyup => Para capturar el Enter y así realizar la búsqueda del texto en la BD
+-->
+
 <form ng-submit="$event.preventDefault()" class="md-toolbar-tools" flex style="color:white">
+  <!-- AUTOCOMPLETADOR -->
   <md-autocomplete
       flex
       md-selected-item="$ctrl.selectedItem"
@@ -10,11 +28,15 @@
       md-min-length="4"
       ng-keyup="$ctrl.searchOnKeyUp($event)"
       placeholder="Buscar productos...">
+    <!-- las coindicencias al escribir texti -->
     <md-item-template>
       <span md-highlight-text="$ctrl.searchText" md-highlight-flags="^i">{{item.name}}</span>
     </md-item-template>
   </md-autocomplete>
-  <md-button class="md-fab md-mini" aria-label="Buscar" ng-click="$ctrl.search()">
+
+  <!-- BOTÓN BUSCAR -->
+  <!-- Realiza la búsqueda de productos con el texto escrito -->
+  <md-button class="md-fab md-mini" aria-label="Buscar" ng-click="$ctrl.searchBD()">
     <md-icon class="material-icons md-48"> search </md-icon>
   </md-button>
 </form>

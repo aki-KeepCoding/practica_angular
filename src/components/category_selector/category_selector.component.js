@@ -6,9 +6,9 @@
             controller: CategorySelectorComponent
         })
 
-        CategorySelectorComponent.$inject = ['$log', 'CategoryService', 'lodash']
+        CategorySelectorComponent.$inject = ['CategoryService', 'lodash']
 
-        function CategorySelectorComponent($log, CategoryService, _) {
+        function CategorySelectorComponent(CategoryService, _) {
             var $ctrl = this
              
             $ctrl.categories = {

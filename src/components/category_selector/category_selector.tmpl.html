@@ -1,5 +1,7 @@
+ <!-- Selecctor de filtro de categorías -->
  <md-list >
     <md-subheader class="md-no-sticky">Categorías</md-subheader>
+    <!-- Renderizamos cada categoría con su correspondiente checkbox  -->
     <md-list-item ng-repeat="category in $ctrl.categories.items">
       <p>{{category.name}}</p>
       <md-checkbox class="md-secondary" 

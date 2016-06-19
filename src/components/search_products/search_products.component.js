@@ -6,21 +6,25 @@
             controller: SearchProductsComponent
         })
 
+        // ProductService
         SearchProductsComponent.$inject = ['$log', 'ProductService']
 
         function SearchProductsComponent($log, ProductService) {
             var $ctrl = this
-            // 
+            // Lista de productos para sugerencias del autocompletador
             $ctrl.products = loadAllProducts()
             
-            // Interface
+            /* ==== INTERFACE ==== */
             $ctrl.querySearch = querySearch
             $ctrl.searchOnKeyUp = searchOnKeyUp
             $ctrl.selectedItemChange = selectedItemChange
             $ctrl.searchTextChange   = searchTextChange
-            $ctrl.search = search
+            $ctrl.searchBD = searchBD
             $ctrl.searchText = ""
-            // Implementation
+
+
+            /* ==== IMPLEMENTATION ==== */
+            // Buscador de sugerencias
             function querySearch (query) {
                 if (query) {
                     var res = $ctrl.products.filter( function (product) {
@@ -31,6 +35,7 @@
                     return []
                 }
             }
+            //Busca sugerencias cuando cambia el texto (ver template y md-search-text-change)
             function searchTextChange(text) {
                $ctrl.searchText = text
                if ($ctrl.searchText === "" ) {
@@ -38,12 +43,12 @@
                     querySearch("")
                }
             }
-            function selectedItemChange(item) {
-                search()
+            // Si seleccionamos un elemento sugerido llamamos a buscar en BD 
+            function selectedItemChange() {
+                searchBD()
             }
-            /**
-             * Build `states` list of key/value pairs
-             */
+
+            // Cargamos todos los productos (para las sugerencias del autocompletador)
             function loadAllProducts() {
               return ProductService
                     .getAll()
@@ -52,13 +57,15 @@
                     }) 
             }
 
-            function search () {
+            // Buscar en BD
+            function searchBD () {
                 ProductService.search($ctrl.searchText)
             }
 
+            // Buscar en BD cuando se pulsa Enter
             function searchOnKeyUp ($event) {
                 if ($event.keyCode === 13){
-                    search()
+                    searchBD()
                 }
             }
         }

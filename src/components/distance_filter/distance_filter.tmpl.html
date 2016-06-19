@@ -1,7 +1,9 @@
+ <!-- Filtro de distancia -->
  <md-list>
   <md-subheader class="md-no-sticky">Distancia</md-subheader>
   <md-list-item>
     <p>Filtrar por distancia? (En Km)</p>
+    <!-- Se puede activar o desactivar el filtro por distancia -->
     <md-switch 
       class="md-primary" 
       md-no-ink aria-label="Activar Distancia" 
@@ -9,15 +11,22 @@
     </md-switch>
   </md-list-item>
   <md-list-item>
+    <!-- Un slider que nos permite seleccionar la distancia filtrada 0-100-200-...-500 -->
     <md-slider-container flex layout="row">
+    <!-- 
+    * ng-model = $ctrl.distance.km 
+    * 
+    -->
       <md-slider 
             id="distance-slider"
             flex 
             min="0" max="500" step="100"
             ng-disabled="!$ctrl.distance.enabled"
             ng-model="$ctrl.distance.km" 
+            ng-model-options="{ updateOn: 'blur' }"
             aria-label="distancia" >
       </md-slider>
+      <!-- Vista del valor seleccionado en el slider -->
       <md-input-container flex="20">
         <input 
           flex type="number" 
@@ -28,6 +37,7 @@
     </md-slider-container>
   </md-list-item>
 
+  <!-- Imagen de la localización actual obtenida con Google Static Maps API -->
   <md-list-item >
     <div layout="row" layout-align="center center">
       <img src="{{$ctrl.staticMapUrl}}" alt="">

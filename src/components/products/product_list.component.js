@@ -6,6 +6,13 @@
             controller: ProductListComponent
         })
 
+        /*
+        * $sanitize => necesario para renderizar correctamente el texto que viene en html desde el API
+        * $mdMedia => Servicio de Angular-Material para controlar resoluciónes de pantalla
+        * ProductService => servicio de gestión de lista de productos
+        * CategoryService => servicio de gestión de lista de categorias
+        * UserService =>
+        */
         ProductListComponent.$inject = ['$log', 
                                         '$sanitize', 
                                         '$mdMedia',
@@ -53,6 +60,7 @@
                 // Obtenemos la distancia 'almacenada' en DistanceService
                 $ctrl.distance = DistanceService.distance
 
+                // Filtro por Faviritos
                 $ctrl.favoriteFilter = FavoritesService.favoriteFilter
             };
             
@@ -63,11 +71,13 @@
             $ctrl.customLgLayout = customLgLayout
 
             // Gestion de favoritos
-            // toggleFav => gestiona el click sobre el botón favorito
-            // isFavorite => comprueba si un 
+            // * toggleFav => gestiona el click sobre el botón favorito
+            // * isFavorite => comprueba si un 
             $ctrl.toggleFav = toggleFav
             $ctrl.isFavorite = isFavorite
 
+
+            /* =====IMPLEMENTACION=====  */
             function customLgLayout () {
                 // Ajuste fino para tamaños de pantalla LG
                 // $mdMedia => helper de angular-material para cálculos de tamaños de pantalla
@@ -80,14 +90,16 @@
                 }
             }
 
+            // Activar/desactivar favoritos en FavoritesService (con localstorage)
             function toggleFav (product) {    
+                // Se guarda una propiedad favorite en el modelo de productos
                 product.favorite = FavoritesService.toggleFavorite(product.id)
             }
-            
+
+            // Devuelve si un producto es favorito
             function isFavorite (product) {
-                if (typeof(product.favorite) === 'undefined') {
-                    product.favorite = FavoritesService.getFavorite(product.id)
-                }
+                // 
+                product.favorite = FavoritesService.getFavorite(product.id)
                 return product
                 
                 

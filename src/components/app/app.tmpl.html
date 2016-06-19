@@ -1,20 +1,52 @@
 <div layout-fill layout="column">
+
+    <!-- TOOLBAR -->
     <md-toolbar class="md-whiteframe-4dp" layout="row" layout-align="space-between center">
         <h1 id="logo" class="md-toolbar-tools" flex  >WhatAPoP</h1>
+          <!-- COMPONENTE SEARCHPRODUCT -->
           <search-product flex="40"></search-product>
+
         <span flex></span>
     </md-toolbar>
+    <!-- 
+    Layout=row
+    |sidebar|listaproductos/detalle| 
+    -->
      <div  layout="row" flex>
+        <!-- SIDEBAR -->
+        <!-- 
+        - md-is-locked-open => Si el ancho de pantalla es mayor que 333px mantenemos abierto el si 
+        - md-whiteframe-2dp => Le añadimos una sombra al sidebar
+        - layout=column => Layout por columnas 
+          |categorías|
+          |favoritos |
+          |distancia |
+        - flex=20 => el sidebar ocupa el 20% [20%|Resto]
+        -->
+
         <md-sidenav 
-            md-is-locked-open="$mdMedia('min-width: 333px')"
+            md-is-locked-open="true"
             class="md-whiteframe-2dp"  
             layout="column" 
             flex="20">
+
+            <!-- COMPONENTE SELECTOR CATEGORÍAS -->
             <category-selector></category-selector>
+
+            <!-- COMPONENTE SELECTOR DE FAVORITOS -->
             <favorite-selector></favorite-selector>
+
+            <!-- COMPONENTES FILTRO DE DISTANCIA -->
+            <!-- Se muestra sólo si tenemos disponible la geolocalización (ng-show) -->
             <distance-filter ng-show="$ctrl.isGeolocationAvailable"></distance-filter>
+
+
         </md-sidenav>
+        <!-- FIN SIDEBAR -->
+
+      <!-- CONTENIDO -->
       <md-content layout-padding flex>
+        <!-- VISTA DINÁMICA -->
         <ng-outlet></ng-outlet>
       </md-content>
 </div>

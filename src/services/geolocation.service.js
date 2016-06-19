@@ -13,22 +13,24 @@
                 longitude: 0,
                 latitude: 0
             }
-            // Interface
+            /* ==== INTERFACE ==== */
             return {
                 isAvailable: isAvailable,
                 getCurrentPosition: getCurrentPosition
             }
-            // Implementation
+            /* ==== IMPLEMENTATION ==== */
             function isAvailable () {
+                // Comprueba si el browser soporta la geolocalización
                 if ("geolocation" in navigator){
                     return true
                 } else {
                     return false
                 }
             }
+            // Obtener la posiión actual 
             function getCurrentPosition(){
                 var deferred = $q.defer()
-                if (!isAvailable()){
+                if (!isAvailable()) {
                     $log.error("No geolocation available in your browser")
                     deferred.reject({})
                 }

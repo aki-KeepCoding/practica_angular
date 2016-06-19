@@ -1,49 +1,64 @@
 
+<!-- VISTA DETALLE DEL PRODUCTO -->
+
+<!--
+    md-content = Contenido de detalle producto
+    * flex => ocupa el ancho necesario 
+    * md-whiteframe => se aplica una sombra al container
+    * layout=row => Se renderizan los subcomponentes en línea 
+        |flex| detallel |localización| flex|
+-->
     <md-content flex layout-padding class="md-whiteframe" layout="row">
-        <!-- <span class="md-title">{{$ctrl.product.name}}</span>
-        <span class="md-subhead">{{product.category.name}}</span>
-    
-
-        {{ $ctrl.product | json }}
-        <button ng-click="$ctrl.gotoProducts()">Back</button>
- -->
-        <span flex></span>
-
+            <span flex></span>
+        
+            <!-- TARJETA DE DETALLE PRODUCTO -->
             <md-card flex="50">
-            <md-card-header layout-align="space-between center">
-                <md-card-title-text>
-                    <span class="md-headline">{{$ctrl.product.name}}</span>
-                </md-card-title-text>
+
+                <!-- título -->
+
+                <md-card-header layout-align="space-between center">
+                    <md-card-title-text>
+                        <span class="md-headline">{{$ctrl.product.name}}</span>
+                    </md-card-title-text>
+                </md-card-header>
                 
-            </md-card-header>
-
+                <!-- datos detalle producto -->
                 <md-card-content layout-padding layout="row">
-                    
-                    <!-- <div class="md-media-xl card-media" style="background-color: #999999;"> -->
-                        <img src="{{'http://localhost:8000/' + $ctrl.product.photos[0]}}" alt="" flex>
-                        <!-- </div> -->
-                        <div layout="column" flex layout-align="space-around">
-                            <p ng-bind-html="$ctrl.product.description"></p>
-                            <span flex></span>
-                        </div>
-                    
-
+                    <!-- imagen del producto -->
+                    <img src="{{$ctrl.serverBase + $ctrl.product.photos[0]}}" alt="" flex>
+                    <!-- 
+                        descripción de producto  
+                        layout=column => el span flex hace que la descripción se "pege" a la parte superior
+                            |descripción|
+                            |flex       |
+                    -->
+                    <div layout="column" flex layout-align="space-around">
+                        <p ng-bind-html="$ctrl.product.description"></p>
+                        <span flex></span>
+                    </div>
                 </md-card-content>
+
+                <!-- Botón de vuelta a lista de productos -->
+                <!-- layout-align=end center => para alinear el botón a la derecha de la tarjeta -->
                 <md-card-actions layout="row" layout-align="end center">
                     <md-button class="md-primary md-raised" ng-click="$ctrl.gotoProducts()">Volver</md-button>
                 </md-card-actions>
+
             </md-card>
+
+            <!-- tarjeta de detalles adicionales: precio, usuario, localización -->
             <md-card >
+                <!-- Título tarjeta -> renderizamos avatar y nombre usuario -->
                 <md-card-header layout-align="space-between center">
                     <md-card-avatar>
-                        <img class="md-user-avatar" src="{{ 'http://localhost:8000/' + $ctrl.product.seller.avatar}}"/>
+                        <img class="md-user-avatar" src="{{ $ctrl.serverBase + $ctrl.product.seller.avatar}}"/>
                     </md-card-avatar>
                      <md-card-header-text>
                         <span class="md-title">{{$ctrl.product.seller.nick}}</span>
                     </md-card-header-text>
-                    
-                
-                </md-card-header>
+                </md-card-header>ç
+
+                <!-- Contenido tarjeta: precio, categoría -->
                 <md-card-content layout-padding >
                     <md-list class="md-dense">
                         <md-list-item>
@@ -53,7 +68,7 @@
                             Categoría: {{$ctrl.product.category.name}}
                         </md-list-item>
                     </md-list>
-                                        
+                    <!-- Imagen de localización del producto () -->
                     <img src="{{$ctrl.staticMapUrl}}" alt="">
                 </md-card-content>
             </md-card>

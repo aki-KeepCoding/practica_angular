@@ -1,3 +1,4 @@
+// Filtro de favoritos
 (function() {
     angular
         .module('whatapop')
@@ -6,11 +7,14 @@
             controller: FavoriteSelectorComponent
         })
 
-        FavoriteSelectorComponent.$inject = ['$log', 'FavoritesService', 'lodash']
+        FavoriteSelectorComponent.$inject = ['FavoritesService']
 
-        function FavoriteSelectorComponent($log, FavoritesService, _) {
+        function FavoriteSelectorComponent(FavoritesService) {
             var $ctrl = this
-             
+            
+            // Enlazamos el objeto favoriteFilter 
+            //  Cuando cambiemos el valor con el switch se actualizarán el resto de 
+            //  componentes que usen el mismo objeto FavoriteService.favoriteFilter
             $ctrl.favoriteFilter = FavoritesService.favoriteFilter
             
         }

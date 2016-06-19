@@ -6,12 +6,13 @@
         UserService.$inject = ['$http', '$q', '$log', 'CONF']
 
         function UserService ($http, $q, $log, CONF) {
-            // Interface
+            /* ==== INTERFACE ==== */
             return {
                 getAll: getAll,
                 get: get
             }
-            // Implementation
+            /* ==== Implementation ==== */
+            // getAll => Recupera la lista completa de usuarios de BD
             function getAll(){
                 return $http
                     .get(CONF.API_BASE + CONF.API_ENDPOINT_USERS)
@@ -25,6 +26,7 @@
                 
             }
 
+            // get(id) => dado un id se obtiene el usuario correspondiente desde BD
             function get (id) {
                 if (!id) return $q.when({})
                 return $http

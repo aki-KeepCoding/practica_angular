@@ -1,11 +1,23 @@
+<!-- Vista de tipo Rejilla para renderizar las "tarjetas" de cada producto
+  
+  La rejilla se adapta con diferente tamaños de celda (md-row-height) 
+  y cantidad de columnas (md-clos-lg) según el tamaño de pantalla (xs / sm / md / lg / gt-lg)
+
+  Para md-cols-lg se ha obtado por ajustar las columnas para resoluciones menores de 1750px (ver funcion customLgLayout() del controlador) -->
 <md-grid-list
-        flex        
+        flex
         md-cols-xs="1" md-cols-sm="1" md-cols-md="2"  md-cols-lg="{{$ctrl.customLgLayout()}}" md-cols-gt-lg="5"
         md-row-height-xs="5:1" md-row-height-sm="1:1" md-row-height-md="3:1" md-row-height-lg="8:1" md-row-height-gt-lg="5:1"
         md-gutter="5px" md-gutter-gt-sm="3px" >
 
-    <md-grid-tile  class="green"
-                  ng-repeat="product in $ctrl.filteredList.items | 
+    <!-- 
+    Cada tile (celda) contiene una tarjeta (md-card)
+    Se aplican filtros por categoría, distancia y favoritos a la lista de productos filtrados por el cuadro de búsqueda 
+    Los rowspan se adaptan a la resolución para intentar que queden bien. (disclaimer: puede que el ajuste haya que refinarlo más para más resoluciones de pantalla)
+    -->
+
+    <!-- REJILLA -->
+    <md-grid-tile ng-repeat="product in $ctrl.filteredList.items | 
                               categoryFilter: $ctrl.selectedCategories |
                               distanceFilter: $ctrl.users : $ctrl.location : $ctrl.distance |
                               favoriteFilter: $ctrl.favoriteFilter"
@@ -16,50 +28,82 @@
                   md-rowspan-gt-lg="10" 
                   >
         
+        <!-- TARJETA -->
         <md-card class="md-dense">
-            <div class="md-card-image"  style="height:150px; background-image:url({{'http://localhost:8000/' + product.photos[0]}});background-size:cover;background-position:center center"></div>
-            <md-card-header>
-                <md-card-avatar>
-                    <img class="md-user-avatar" src="{{ 'http://localhost:8000/' + product.seller.avatar}}"/>
-                </md-card-avatar>
-                <md-card-header-text>
-                    <span class="md-title">{{product.seller.nick}}</span>
-                    <span class="md-subtitle">{{product.price}} €</span>
-                </md-card-header-text>
-            </md-card-header>
-            
-            <!-- <img ng-src="{{}"  alt="Washed Out" style="height:50"> -->
-            <md-card-title>
-                <md-card-title-text>
-                    <span class="md-headline">{{product.name}}</span>
-                    <span class="md-subhead">{{product.category.name}}</span>
-                </md-card-title-text>
-            </md-card-title>
-            <md-card-actions layout="row" layout-align="start center" style="padding:0 10px 0 10px">
-                <md-card-icon-actions>
+          <div class="md-card-image"  style="height:150px; background-image:url({{'http://localhost:8000/' + product.photos[0]}});background-size:cover;background-position:center center"></div>
 
-                  <md-button 
-                        class="md-mini" 
-                        aria-label="Favorite"
-                        ng-class="{'md-hue-2': $ctrl.isFavorite(product).favorite, 'md-fab': $ctrl.isFavorite(product).favorite, 'md-icon-button': !$ctrl.isFavorite(product).favorite }"
-                        ng-click="$ctrl.toggleFav(product)">
-                        <md-icon  class="material-icons "> favorite </md-icon>
-                  </md-button>
-                    <md-button class="md-icon-button" aria-label="Share">
-                <md-icon class="material-icons"> share-arrow </md-icon>
+          <!-- Header de tarjeta -->
+          <md-card-header>
+              <md-card-avatar>
+                  <img class="md-user-avatar" src="{{ 'http://localhost:8000/' + product.seller.avatar}}"/>
+              </md-card-avatar>
+              <md-card-header-text>
+                  <span class="md-title">{{product.seller.nick}}</span>
+                  <span class="md-subtitle">{{product.price}} €</span>
+              </md-card-header-text>
+          </md-card-header>
+          
+          <!-- Título de tarjeta -->
+          <md-card-title>
+              <md-card-title-text>
+                  <span class="md-headline">{{product.name}}</span>
+                  <span class="md-subhead">{{product.category.name}}</span>
+              </md-card-title-text>
+          </md-card-title>
+
+          <!-- Línea de botones de acción -->
+          <md-card-actions 
+              layout="row" 
+              layout-align="start center" 
+              style="padding:0 10px 0 10px">
+              <md-card-icon-actions>
+
+                <!-- Botón de Favorito -->
+                <!-- 
+                * ng-class => aplica ...
+                  * md-hue-2 y md-fav (rojo y círculo) para los productos que son favoritos
+                  * md-icon-buton (icono gris) para productos que no son favoritos 
+                -->
+                <md-button 
+                      class="md-mini"
+                      aria-label="Favorite"
+                      ng-class="{'md-hue-2': $ctrl.isFavorite(product).favorite, 'md-fab': $ctrl.isFavorite(product).favorite, 'md-icon-button': !$ctrl.isFavorite(product).favorite }"
+                      ng-click="$ctrl.toggleFav(product)">
+                      <md-icon  class="material-icons "> favorite </md-icon>
+                </md-button>
+              </md-card-icon-actions>
+
+              <!-- Botón de ver mas -> ng-link abre ruta ProductDetail -->
+              <md-button 
+                  class="md-raised md-primary" 
+                  ng-link="['ProductDetail', {id: product.id}]">
+                Ver +
               </md-button>
-            </md-card-icon-actions>
-            <md-button class="md-raised md-primary" ng-link="['ProductDetail', {id: product.id}]">Ver +</md-button>
           </md-card-actions>
+
+          <!-- contenido de la tarjeta -->
           <md-card-content>
-              <p ng-bind-html="product.description.substring(0,100)"></p>
-              <large-tooltip 
-                  text="{{product.description}}"
-                  delay="2000">
-              </large-tooltip>
+            <!-- ng-bind-html => tiene en cuenta que el texto viene en formato html desde el backend. Aplicamos substring para no cargar sólo un extracto de la descripción-->
+            <p ng-bind-html="product.description.substring(0,100)"></p>
+
+            <!-- 
+            Directiva personalizada de tooltip para ver descripción completa 
+            * text => El texto que va ha renderizarse en el tooltip 
+            * delay => tiempo en ms que tardara el tooltip en aparecer cuando el mouse está sobre la descripción
+            -->
+            <large-tooltip 
+                text="{{product.description}}"
+                delay="2000">
+            </large-tooltip>
+
           </md-card-content>
+          <!-- Fin contenido tarjeta -->
+
         </md-card>
-    </md-grid-tile>
+          <!-- FIN TARJETA -->
+
+      </md-grid-tile>
+      <!-- FIN CELDA -->
 
 
 

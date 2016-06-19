@@ -3,13 +3,19 @@
         .module('whatapop')
         .service('FavoritesService', FavoritesService)
 
-        FavoritesService.$inject = ['$http', '$q', '$log', 'CONF', 'lodash']
+        FavoritesService.$inject = []
 
-        function FavoritesService ($http, $q, $log, CONF, _) {
-            var favorites = null
+        function FavoritesService () {
+            var favorites = null // objeto localstorage
+
+            // favoriteFilter almacena el estado del filtro de favoritos
             var favoriteFilter = {
                 enabled : false
             }
+
+            // Se comprueba si tenemos disponible localstorage
+            //   Si no hay se ofrece una alternativa que lo simula durante una sesión
+            //   (cuando se cierra el navegador se volatiliza...)
             if (typeof(Storage) !== "undefined") {
                 favorites = localStorage
             } else {
@@ -26,6 +32,7 @@
 
             }
 
+            /* ==== INTERFACE ==== */
             return {
                 favorites : favorites,
                 favoriteFilter: favoriteFilter,
@@ -34,20 +41,26 @@
                 getFavorite: getFavorite
             }
 
+            // toggleFavorite = guardamos si producto.id = favorito (valor = !valor) siendo valor true o false
             function toggleFavorite (productId) {
                 var val = getFavorite(productId)
                 favorites.setItem(productId + '', !val)
                 return !val
             }
+
+            // setFAvorite => guardamos el favorito sobre producto.id = favorito (val)
             function setFavorite (productId, val) {
                 favorites.setItem(productId + '', val)
             }
 
+            // getFavorite => devuelve si un producto.id es favorito
             function getFavorite (productId) {
                 var val = strToBool(favorites.getItem(productId + ''))
                 return val
             }
 
+            // Como en localstorage se almacena el valor true y false como string es necesario 
+            //  reinterpretarlos como boolean
             function strToBool(val) {
                  if (val === "true") {
                     val = true
